@@ -1,0 +1,16 @@
+div .edit-header {
+  position: relative;
+  padding-bottom: 63px;
+}
+
+div .edit-items {
+  position: absolute;
+}
+
+div .edit-title {
+  margin-left: 92px;
+}
+
+div .delete-btn {
+
+}

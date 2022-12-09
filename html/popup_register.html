@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>NUCT SETTING</title>
+    <script src="../js/script/popup_register.js"></script>
+    <link rel="stylesheet" href="../css/popup.css"/>
+  </head>
+  <body>
+    <div class="form-wrapper">
+      <h2>Register User</h2>
+      <form>
+        <div class="form-item">
+          <label for="username"></label>
+          <input type="text" id="username" name="username" required="required" placeholder="名古屋大学ID(Nagoya University ID)">
+        </div>
+        <div class="form-item">
+          <label for="password"></label>
+          <input type="password" id="password" name="password" required="required" placeholder="パスワード(Password)">
+        </div>
+        <div class="form-item" >
+          <label for="token"></label>
+          <input type="password" id="token" name="token" required="required" placeholder="認証シード(Authentication Seed)">
+        </div>
+        <div class="form-item" >
+          <label for="option_name"></label>
+          <input type="text" id="option_name" name="option_name" placeholder="表示名(Display name) - option">
+        </div>
+        <div class="button-panel">
+          <input type="submit" id="register" class="button" title="Register" value="Register">
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
