@@ -12,5 +12,12 @@ div .edit-title {
 }
 
 div .delete-btn {
+  margin-left: 240px;
+  margin-top: 20px;
+}
 
+div .delete-btn:hover {
+  transform:
+  translateX(-2px)
+  translateY(-3px);
 }
