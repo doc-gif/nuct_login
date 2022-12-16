@@ -6993,7 +6993,7 @@
                             document.getElementsByName('submit')[0].name = '_submit';
                             document.forms[0].elements['username'].value = USERNAME;
                             document.forms[0].elements['password'].value = PASSWORD;
-                            // document.forms[0].submit();
+                            document.forms[0].submit();
                         }
 
                         if (document.forms[0].elements['token'] != null) {
