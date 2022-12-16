@@ -6985,21 +6985,19 @@
                 const password_key = 'password' + String(target_user)
                 const secret_key = 'secret' + String(target_user)
                 chrome.storage.sync.get(['ex_bool', username_key, password_key, secret_key], (value) => {
-                    if(value[username_key] !== undefined) {
-                        if (value.ex_bool) {
-                            const USERNAME = value[username_key];
-                            const PASSWORD = value[password_key];
-                            const SECRET_KEY = value[secret_key];
-                            if (document.getElementsByName('submit')[0] != null) {
-                                document.getElementsByName('submit')[0].name = '_submit';
-                                document.forms[0].elements['username'].value = USERNAME;
-                                document.forms[0].elements['password'].value = PASSWORD;
-                                document.forms[0].submit();
-                            }
+                    if (value.ex_bool && value[username_key] !== undefined) {
+                        const USERNAME = value[username_key];
+                        const PASSWORD = value[password_key];
+                        const SECRET_KEY = value[secret_key];
+                        if (document.getElementsByName('submit')[0] != null) {
+                            document.getElementsByName('submit')[0].name = '_submit';
+                            document.forms[0].elements['username'].value = USERNAME;
+                            document.forms[0].elements['password'].value = PASSWORD;
+                            // document.forms[0].submit();
+                        }
 
-                            if (document.forms[0].elements['token'] != null) {
-                                document.forms[0].elements['token'].value = totp(SECRET_KEY, DIGIT, TIME_STEP);
-                            }
+                        if (document.forms[0].elements['token'] != null) {
+                            document.forms[0].elements['token'].value = totp(SECRET_KEY, DIGIT, TIME_STEP);
                         }
                     }
                 });
