@@ -83,6 +83,15 @@ function delete_user(target, total) {
     })
 }
 
+function change_type(target_id) {
+    const target = document.getElementById(target_id);
+    if (target.type === 'password') {
+        target.type = 'text';
+    } else {
+        target.type = 'password';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('delete').addEventListener('click', () => {
         chrome.storage.sync.get(['target_id', 'num_user'], (value1) => {
@@ -92,6 +101,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.getElementById('edit').addEventListener('click', () => {
         edit_storage();
-    })
+    });
+    document.getElementById('show_password').addEventListener('click', () => {
+        change_type('password');
+    });
+    document.getElementById('show_token').addEventListener('click', () => {
+        change_type('token')
+    });
     set_data();
 });
