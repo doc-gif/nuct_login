@@ -6930,20 +6930,20 @@
         const DIGIT = 6;
         const TIME_STEP = 30;
 
-        function leftpad(str, len, pad) {
+        function left_pad(str, len, pad) {
             if (len + 1 >= str.length) {
                 str = Array(len + 1 - str.length).join(pad) + str;
             }
             return str;
         }
 
-        function base32tohex(base32) {
+        function base32_to_hex(base32) {
             const base32chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
             let bits = '';
             let hex = '';
-            for (i = 0; i < base32.length; i++) {
+            for (let i = 0; i < base32.length; i++) {
                 const value = base32chars.indexOf(base32.charAt(i).toUpperCase());
-                bits += leftpad(value.toString(2), 5, '0');
+                bits += left_pad(value.toString(2), 5, '0');
             }
             for (i = 0; i+4 <= bits.length; i+=4) {
                 const chunk = bits.substring(i, i+4);
@@ -6952,25 +6952,25 @@
             return hex;
         }
 
-        function hextodec(h) { return parseInt(h, 16); }
-        function dectohex(d) { return ('0' + (Number(d).toString(16))).slice(-2); }
+        function hex_to_dec(h) { return parseInt(h, 16); }
+        function dec_to_hex(d) { return ('0' + (Number(d).toString(16))).slice(-2); }
 
         function totp(key, digit, step) {
             let count = parseInt((new Date().getTime() - 30000) / 1000 / step);
             const arrCnt = new Array(8);
             for (i = arrCnt.length - 1; i >= 0; i--) {
-                arrCnt[i] = dectohex(count & 0xff);
+                arrCnt[i] = dec_to_hex(count & 0xff);
                 count >>= 8;
             }
             const hexCnt = CryptoJS.enc.Hex.parse(arrCnt.join(''));
-            const hexSrt = CryptoJS.enc.Hex.parse(base32tohex(key));
+            const hexSrt = CryptoJS.enc.Hex.parse(base32_to_hex(key));
             const hexHmac = CryptoJS.HmacSHA1(hexCnt, hexSrt).toString(CryptoJS.enc.Hex);
-            const arrHmac = new Array();
-            for (i = 0; i < hexHmac.length; i = i+2) {
-                arrHmac.push(hextodec(hexHmac.substring(i, i+2)));
+            const arrHmac = [];
+            for (let i = 0; i < hexHmac.length; i = i+2) {
+                arrHmac.push(hex_to_dec(hexHmac.substring(i, i+2)));
             }
             const offset = arrHmac[arrHmac.length - 1] & 0xf;
-            const trunc = hextodec(hexHmac.substring(offset*2, offset*2+8)) & 0x7fffffff;
+            const trunc = hex_to_dec(hexHmac.substring(offset*2, offset*2+8)) & 0x7fffffff;
             let otp = trunc % Math.pow(10, digit);
             while (otp.toString().length < digit) {
                 otp = '0' + otp;
@@ -6989,11 +6989,30 @@
                         const USERNAME = value[username_key];
                         const PASSWORD = value[password_key];
                         const SECRET_KEY = value[secret_key];
-                        if (document.getElementsByName('submit')[0] != null) {
+                        let last_status = null;
+                        if (document.getElementsByName('submit')[0] != null && last_status !== 401) {
                             document.getElementsByName('submit')[0].name = '_submit';
                             document.forms[0].elements['username'].value = USERNAME;
                             document.forms[0].elements['password'].value = PASSWORD;
-                            document.forms[0].submit();
+                            const form = document.forms[0];
+                            const XHR = new XMLHttpRequest();
+                            const FD = new FormData(form);
+
+                            XHR.open("POST", "");
+                            XHR.send(FD);
+
+                            XHR.onreadystatechange = () => {
+                                if (XHR.status === 401) {
+                                    last_status = 401;
+                                    Swal.fire(
+                                        'NU_CAS ログイン',
+                                        'NU_CAS ログインに登録された名古屋大学IDまたはパスワードが間違っています。',
+                                        'error'
+                                    );
+                                } else {
+                                    form.submit();
+                                }
+                            }
                         }
 
                         if (document.forms[0].elements['token'] != null) {
