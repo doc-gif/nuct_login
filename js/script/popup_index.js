@@ -7063,8 +7063,9 @@
                             }
                         })
                         $(card_id).find('#copy').on('click', () => {
-                            navigator.clipboard.writeText($('#card1').find('#token').text());
-                            alert("コピーしました")
+                            navigator.clipboard.writeText($('#card1').find('#token').text()).then(() => {
+                                alert("コピーしました");
+                            });
                         })
                         $(card_id).find('#edit').on('click', () => {
                             chrome.storage.sync.set({
