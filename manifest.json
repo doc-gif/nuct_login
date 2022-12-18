@@ -17,8 +17,12 @@
                 "https://auth-mfa.nagoya-u.ac.jp/cas/*"
             ],
             "run_at": "document_idle",
+            "css": [
+                ".//css//sweetalert2.min.css"
+            ],
             "js": [
-                ".//js//script//contentScript.js"
+                ".//js//script//contentScript.js",
+                ".//js//module//sweetalert2.min.js"
             ]
         }
     ]
