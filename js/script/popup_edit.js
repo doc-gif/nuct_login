@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         change_type('password');
     });
     document.getElementById('show_token').addEventListener('click', () => {
-        change_type('token')
+        change_type('token');
     });
     set_data();
 });

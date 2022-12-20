@@ -39,8 +39,23 @@ function set_storage() {
     }
 }
 
+function change_type(target_id) {
+    const target = document.getElementById(target_id);
+    if (target.type === 'password') {
+        target.type = 'text';
+    } else {
+        target.type = 'password';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('register').addEventListener('click', () => {
         set_storage();
+    });
+    document.getElementById('show_password').addEventListener('click', () => {
+        change_type('password');
+    });
+    document.getElementById('show_token').addEventListener('click', () => {
+        change_type('token');
     });
 });
