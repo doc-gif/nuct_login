@@ -7106,7 +7106,11 @@
             url: '../html/popup_add.html',
             dataType: 'html',
             success: (data) => {
-                $('body').append(data);
+                chrome.storage.sync.get('num_user', (value3) => {
+                    if (value3['num_user'] !== 5) {
+                        $('body').append(data);
+                    }
+                })
             },
             error: () => {
                 console.log('include error card');
