@@ -1,29 +1,29 @@
 {
-    "manifest_version": 3,
-    "name": "NU_CAS ログイン",
-    "version": "1.0.0",
-    "description": "名古屋大学のCASログイン画面でユーザー名、パスワード、認証コードを自動入力します。",
-    "action": {
-        "default_title": "nu_cas_login",
-        "default_popup": "./html/popup_index.html"
-    },
-    "permissions": [
-        "storage",
-        "alarms"
-    ],
-    "content_scripts": [
-        {
-            "matches": [
-                "https://auth-mfa.nagoya-u.ac.jp/cas/*"
-            ],
-            "run_at": "document_idle",
-            "css": [
-                ".//css//sweetalert2.min.css"
-            ],
-            "js": [
-                ".//js//script//contentScript.js",
-                ".//js//module//sweetalert2.min.js"
-            ]
-        }
-    ]
+  "manifest_version": 3,
+  "name": "NU_CAS ログイン",
+  "version": "1.0.0",
+  "description": "名古屋大学のCASログイン画面でユーザー名、パスワード、認証コードを自動入力します。",
+  "action": {
+    "default_title": "nu_cas_login",
+    "default_popup": "./html/popup_index.html"
+  },
+  "permissions": [
+    "storage",
+    "alarms"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://auth-mfa.nagoya-u.ac.jp/cas/*"
+      ],
+      "run_at": "document_idle",
+      "css": [
+        ".//css//sweetalert2.min.css"
+      ],
+      "js": [
+        ".//js//script//contentScript.js",
+        ".//js//module//sweetalert2.min.js"
+      ]
+    }
+  ]
 }
